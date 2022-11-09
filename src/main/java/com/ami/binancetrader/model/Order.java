@@ -5,22 +5,20 @@ import java.util.Objects;
 
 public class Order {
     private String symbol;
-    private String direction;
     private int leverage;
-    private long size;
+    private long amount;
     private float entryPrice;
-    private float marketPrice;
+    private float markPrice;
 
     public Order() {
     }
 
-    public Order(String symbol, String direction, int leverage, long size, float entryPrice, float marketPrice) {
+    public Order(String symbol, int leverage, long amount, float entryPrice, float markPrice) {
         this.symbol = symbol;
-        this.direction = direction;
         this.leverage = leverage;
-        this.size = size;
+        this.amount = amount;
         this.entryPrice = entryPrice;
-        this.marketPrice = marketPrice;
+        this.markPrice = markPrice;
     }
 
     public String getSymbol() {
@@ -31,12 +29,20 @@ public class Order {
         this.symbol = symbol;
     }
 
-    public long getSize() {
-        return size;
+    public int getLeverage() {
+        return leverage;
     }
 
-    public void setSize(long size) {
-        this.size = size;
+    public void setLeverage(int leverage) {
+        this.leverage = leverage;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
     }
 
     public float getEntryPrice() {
@@ -47,28 +53,12 @@ public class Order {
         this.entryPrice = entryPrice;
     }
 
-    public float getMarketPrice() {
-        return marketPrice;
+    public float getMarkPrice() {
+        return markPrice;
     }
 
-    public void setMarketPrice(float marketPrice) {
-        this.marketPrice = marketPrice;
-    }
-
-    public String getDirection() {
-        return direction;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
-    public int getLeverage() {
-        return leverage;
-    }
-
-    public void setLeverage(int leverage) {
-        this.leverage = leverage;
+    public void setMarkPrice(float markPrice) {
+        this.markPrice = markPrice;
     }
 
     @Override
@@ -80,13 +70,18 @@ public class Order {
             return false;
         }
         Order order = (Order) o;
-        return leverage == order.leverage && size == order.size && Float.compare(order.entryPrice, entryPrice) == 0
-                && Float.compare(order.marketPrice, marketPrice) == 0 && symbol.equals(order.symbol)
-                && direction.equals(order.direction);
+        return leverage == order.leverage && amount == order.amount && Float.compare(order.entryPrice, entryPrice) == 0
+                && Float.compare(order.markPrice, markPrice) == 0 && symbol.equals(order.symbol);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(symbol, direction, leverage, size, entryPrice, marketPrice);
+        return Objects.hash(symbol, leverage, amount, entryPrice, markPrice);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" + "symbol='" + symbol + '\'' + ", leverage=" + leverage + ", amount=" + amount + ", entryPrice="
+                + entryPrice + ", markPrice=" + markPrice + '}';
     }
 }
