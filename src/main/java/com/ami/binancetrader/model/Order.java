@@ -1,23 +1,24 @@
 package com.ami.binancetrader.model;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class Order {
     private String symbol;
     private String direction;
     private int leverage;
-    private long amount;
+    private long size;
     private float entryPrice;
     private float marketPrice;
 
     public Order() {
     }
 
-    public Order(String symbol, String direction, int leverage, long amount, float entryPrice, float marketPrice) {
+    public Order(String symbol, String direction, int leverage, long size, float entryPrice, float marketPrice) {
         this.symbol = symbol;
         this.direction = direction;
         this.leverage = leverage;
-        this.amount = amount;
+        this.size = size;
         this.entryPrice = entryPrice;
         this.marketPrice = marketPrice;
     }
@@ -30,12 +31,12 @@ public class Order {
         this.symbol = symbol;
     }
 
-    public long getAmount() {
-        return amount;
+    public long getSize() {
+        return size;
     }
 
-    public void setAmount(long amount) {
-        this.amount = amount;
+    public void setSize(long size) {
+        this.size = size;
     }
 
     public float getEntryPrice() {
@@ -54,6 +55,22 @@ public class Order {
         this.marketPrice = marketPrice;
     }
 
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public int getLeverage() {
+        return leverage;
+    }
+
+    public void setLeverage(int leverage) {
+        this.leverage = leverage;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -63,13 +80,13 @@ public class Order {
             return false;
         }
         Order order = (Order) o;
-        return leverage == order.leverage && amount == order.amount && Float.compare(order.entryPrice, entryPrice) == 0
+        return leverage == order.leverage && size == order.size && Float.compare(order.entryPrice, entryPrice) == 0
                 && Float.compare(order.marketPrice, marketPrice) == 0 && symbol.equals(order.symbol)
                 && direction.equals(order.direction);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(symbol, direction, leverage, amount, entryPrice, marketPrice);
+        return Objects.hash(symbol, direction, leverage, size, entryPrice, marketPrice);
     }
 }
